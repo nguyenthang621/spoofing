@@ -5,14 +5,14 @@ pipeline {
             steps {
                 script {
                     echo 'Starting the build process...'
-                    sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && mvn clean install'
+                    sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn clean install'
                 }
             }
         }
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && mvn test'
+                sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn test'
             }
         }
         stage('Deploy') {
@@ -26,7 +26,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && mvn clean'
+            sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn clean'
         }
     }
 }
