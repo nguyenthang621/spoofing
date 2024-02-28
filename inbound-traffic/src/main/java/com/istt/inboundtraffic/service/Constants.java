@@ -4,7 +4,7 @@ import java.util.List;
 
 public final class Constants {
 
-	public static final String host = "192.168.13.50";
+	public static final String host = "10.0.40.153";
 
 	public static final int port = 5060;
 
