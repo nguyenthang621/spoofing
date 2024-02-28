@@ -18,6 +18,18 @@ pipeline {
 
         stage('Build') {
             steps {
+		        script {
+                    echo 'Starting the build process...'
+                    sh 'ls'
+                    sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/'
+		            sh 'ls'          
+		            dir('inbound-traffic') {
+		                sh 'ls'
+		                sh '/opt/apache-maven-3.9.6/bin/mvn clean install'
+		            }
+		        }
+		    }
+            steps {
                 echo 'Starting the build process...'
                 sh 'ls'
                 sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/'
