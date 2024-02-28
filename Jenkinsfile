@@ -8,6 +8,7 @@ pipeline {
                     // Thực hiện các lệnh trong thư mục dự án
                     dir('/var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/') {
                         // Hiển thị danh sách tệp trong thư mục dự án
+                        sh 'chmod 777 target'
                         sh 'ls'
                         // Thực hiện lệnh clean và install Maven
                         sh '/opt/apache-maven-3.9.6/bin/mvn clean install'
