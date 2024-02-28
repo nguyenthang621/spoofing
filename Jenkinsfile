@@ -25,6 +25,7 @@ pipeline {
 		            sh 'ls'          
 		            dir('inbound-traffic') {
 		                sh 'ls'
+		                sh 'chmod 777 target'
 		                sh '/opt/apache-maven-3.9.6/bin/mvn clean install'
 		            }
 		        }
