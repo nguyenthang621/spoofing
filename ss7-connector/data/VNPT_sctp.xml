@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<connectdelay value="10000"/>
-<servers/>
-<associations>
-	<name value="ens33_STP1A"/>
-	<association name="ens33_STP1A" assoctype="CLIENT" hostAddress="10.204.16.130" hostPort="2900" peerAddress="10.204.92.150" peerPort="2905" serverName="" ipChannelType="0" extraHostAddresseSize="1">
-		<extraHostAddress value="10.204.16.138"/>
-	</association>
-</associations>
