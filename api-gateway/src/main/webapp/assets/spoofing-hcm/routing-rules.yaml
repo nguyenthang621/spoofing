@@ -1,0 +1,75 @@
+title:
+  index: Routing Rules
+  view: View Route ${ name }
+  update: Update Route ${ name }
+  create: New Route
+  delete: Delete Route ${ name }
+alerts:
+  info: This section contain all Routing Information on Fraud Detector
+apiEndpoint: /services/spoofing-hcm/api/routing-rules
+columns:
+  - name
+  - description
+  - prop: state
+    label: Status
+    options:
+      - label: Enable
+        value: 200
+      - label: Disable
+        value: 403
+  - prop: aprefix
+    label: A Number Prefix
+  - prop: alength
+    label: Length
+fields:
+  - type: tabset
+    fieldGroup:
+      - templateOptions:
+          label: Basic Information
+        fieldGroup:
+          - fieldGroupClassName: row
+            fieldGroup:
+            - key: name
+              type: input
+              className: col-md-6
+              templateOptions:
+                required: true
+                label: Name
+            - key: state
+              type: select
+              className: col-md-6
+              defaultValue: 200
+              templateOptions:
+                label: State
+                options:
+                  - label: Enable
+                    value: 200
+                  - label: Disable
+                    value: 403
+          - key: description
+            type: textarea
+            templateOptions:
+              label: Description
+              cols: 80
+              rows: 5
+          - fieldGroupClassName: row
+            fieldGroup:
+            - key: aprefix
+              type: input
+              wrappers:
+                - form-field
+              className: col-md-6
+              templateOptions:
+                label: A Number Prefix
+                description:  Source Address prefix should be check against
+            - key: alength
+              type: input
+              wrappers:
+                - form-field
+              className: col-md-6
+              defaultValue: 0
+              templateOptions:
+                label: A Number Length
+                type: number
+                description: Source Address length to check against
+                required: true

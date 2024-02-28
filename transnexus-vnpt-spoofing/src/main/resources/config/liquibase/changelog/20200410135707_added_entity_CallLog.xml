@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    
+    <!--
+        Added the entity CallLog.
+    -->
+    <changeSet id="20200410135707-1" author="jhipster">
+        <createTable tableName="call_log">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="calling" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="called" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="request_at" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="response_at" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="state" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="route" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="route_prefix" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="route_length" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="dry_run" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="whitelisted" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="blacklisted" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="error_code" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="error_desc" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="vlr" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="sri_at" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="sri_resp_at" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="call_log" columnName="created_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="call_log" columnName="request_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="call_log" columnName="response_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="call_log" columnName="sri_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="call_log" columnName="sri_resp_at" columnDataType="datetime"/>
+    </changeSet>
+
+    <changeSet id="20200410135707-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20200410135707-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/call_log.csv"
+                  separator=";"
+                  tableName="call_log">
+            <column name="id" type="numeric"/>
+            <column name="calling" type="string"/>
+            <column name="called" type="string"/>
+            <column name="created_at" type="datetime"/>
+            <column name="request_at" type="datetime"/>
+            <column name="response_at" type="datetime"/>
+            <column name="state" type="numeric"/>
+            <column name="route" type="string"/>
+            <column name="route_prefix" type="numeric"/>
+            <column name="route_length" type="numeric"/>
+            <column name="dry_run" type="boolean"/>
+            <column name="whitelisted" type="boolean"/>
+            <column name="blacklisted" type="boolean"/>
+            <column name="error_code" type="numeric"/>
+            <column name="error_desc" type="string"/>
+            <column name="vlr" type="string"/>
+            <column name="sri_at" type="datetime"/>
+            <column name="sri_resp_at" type="datetime"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

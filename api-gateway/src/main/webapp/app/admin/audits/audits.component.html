@@ -1,0 +1,92 @@
+<div class="card">
+    <h2 class="card-header" id="audits-page-heading" jhiTranslate="audits.title">Audits</h2>
+    <div class="card-body">
+    <jhi-alert-error></jhi-alert-error>
+
+    <div class="row">
+        <div class="col-md-5">
+            <h4 jhiTranslate="audits.filter.title">Filter by date</h4>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" jhiTranslate="audits.filter.from">from</span>
+                </div>
+                <input type="date" class="form-control" name="start" [(ngModel)]="fromDate" (ngModelChange)="transition()" required/>
+
+                <div class="input-group-append">
+                    <span class="input-group-text" jhiTranslate="audits.filter.to">To</span>
+                </div>
+                <input type="date" class="form-control" name="end" [(ngModel)]="toDate" (ngModelChange)="transition()" required/>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" *ngIf="audits?.length === 0">
+        <span jhiTranslate="audits.notFound">No audit found</span>
+    </div>
+
+    <div class="table-responsive" *ngIf="audits?.length > 0">
+        <table class="table table-sm table-striped" aria-describedby="audits-page-heading">
+            <thead [ngSwitch]="canLoad()">
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)" *ngSwitchCase="true">
+                    <th scope="col" jhiSortBy="auditEventDate"><span jhiTranslate="audits.table.header.date">Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="principal"><span jhiTranslate="audits.table.header.principal">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="auditEventType"><span jhiTranslate="audits.table.header.status">State</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"><span jhiTranslate="audits.table.header.data">Extra data</span></th>
+                    <th></th>
+                </tr>
+                <tr *ngSwitchCase="false">
+                    <th scope="col"><span jhiTranslate="audits.table.header.date">Date</span></th>
+                    <th scope="col"><span jhiTranslate="audits.table.header.principal">User</span></th>
+                    <th scope="col"><span jhiTranslate="audits.table.header.status">State</span></th>
+                    <th scope="col"><span jhiTranslate="audits.table.header.data">Extra data</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let audit of audits">
+                    <td><span>{{ audit.timestamp | date:'medium' }}</span></td>
+                    <td><small>{{ audit.principal }}</small></td>
+                    <td>{{ audit.type }}</td>
+                    <td>
+                        <span *ngIf="audit.data" ng-show="audit.data.responseCode" class="badge {{ audit.data.responseCode < 400 ? 'badge-info' : 'badge-warning' }}">{{ audit.data.responseCode }}</span>
+                        <span *ngIf="audit.data" ng-show="audit.data.message">{{ audit.data.message }}</span>
+                        <span *ngIf="audit.data" ng-show="audit.data.remoteAddress">
+                          <span jhiTranslate="audits.table.data.remoteAddress">Remote Address</span> {{ audit.data.remoteAddress }}
+                        </span>
+                    </td>
+                    <td>
+                      <button type="button" *ngIf="audit.data" ng-show="audit.data.responsePayload" class="btn btn-info btn-sm" (click)="viewDetail(audit.data.responsePayload)">  <fa-icon [icon]="'eye'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                      </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="audits?.length > 0" class="card-footer">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)" [disabled]="!canLoad()"></ngb-pagination>
+        </div>
+    </div>
+</div>
+
+<ng-template #detailModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Response Payload</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <pre [innerHtml]="model"></pre>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss()">
+            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">OK</span>
+        </button>
+    </div>
+</ng-template>

@@ -1,0 +1,12 @@
+${AnsiColor.BRIGHT_BLUE}
+
+         ██╗███████╗████████╗████████╗
+         ██║██╔════╝╚══██╔══╝╚══██╔══╝
+         ██║███████╗   ██║      ██║   
+         ██║╚════██║   ██║      ██║   
+         ██║███████║   ██║      ██║   
+         ╚═╝╚══════╝   ╚═╝      ╚═╝   
+
+${AnsiColor.RED}
+:: ISTT SS7-CONNECTOR 🤓  :: Running Spring Boot ${spring-boot.version} 
+:: VNPT CALL SPOOFING MANAGEMENT SYSTEM :: ${AnsiColor.DEFAULT}

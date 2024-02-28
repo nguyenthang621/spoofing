@@ -1,0 +1,122 @@
+<div>
+    <h2 id="page-heading">
+        <small [jhiTranslate]="'app.title.' + prop">Data</small>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-data" (click)="navigate(['/data', svc, prop, 'new'])">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  [jhiTranslate]="'app.create-' + prop">
+            Create new Data
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+
+    <div class="alert alert-warning" *ngIf="rows?.length === 0">
+        <span [jhiTranslate]="prop + '.notFound'">No data found</span>
+    </div>
+    <div class="table-responsive" style="min-height: 550px;">
+        <table class="table table-striped table-bordered">
+          <thead>
+              <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                  <th *ngFor="let c of columnKeys; let ci = index;" [class]="_.get(displayColumns, c) ? '' : 'd-none'" [jhiSortBy]="c">
+                      <span [jhiTranslate]="prop + '.label.' + _.get(columnNames, ci)">{{ c }}</span>
+                      <fa-icon [icon]="'sort'"></fa-icon>
+                  </th>
+                  <th class="text-right">
+                    <div ngbDropdown>
+                      <button class="btn btn-outline-secondary btn-sm btn-block" ngbDropdownToggle>
+                        <fa-icon [icon]="'eye'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                      </button>
+                      <div ngbDropdownMenu>
+                        <button ngbDropdownItem type="button" *ngFor="let c of columns" (click)="toggleView(c)">
+                          <span [jhiTranslate]="prop + '.label.' + c" [ngbTooltip]="prop + '.help.' + c | translate">{{ c }}</span>
+                        </button>
+                      </div>
+                    </div>
+                  </th>
+              </tr>
+              <tr>
+                  <th *ngFor="let c of columnKeys" [class]="_.get(displayColumns, c) ? '' : 'd-none'">
+                    <input type="text" class="form-control" [name]="c" [(ngModel)]="searchModel[c]" *ngIf="!filterOperators">
+                    <div class="input-group button-group" *ngIf="filterOperators">
+                      <input type="text" class="form-control" [name]="c" [(ngModel)]="searchModel[c]">
+                      <div ngbDropdown class="input-group-append">
+                        <button class="btn btn-outline-secondary" ngbDropdownToggle><fa-icon icon="cogs"></fa-icon></button>
+                        <div ngbDropdownMenu>
+                          <button ngbDropdownItem type="button" *ngFor="let op of filterOperators" (click)="setSearchOperator(c, op)">{{ 'data.filterOperators.' + op | translate }}</button>
+                        </div>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="text-right">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-info btn-sm" (click)="transition()">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.search">Search</span>
+                      </button>
+                      <button type="button" class="btn btn-secondary btn-sm" (click)="searchModel = {}; clear()">
+                          <fa-icon [icon]="'ban'"></fa-icon>
+                          <span class="d-none d-md-inline" jhiTranslate="entity.action.reset">Reset</span>
+                      </button>
+                    </div>
+                  </th>
+              </tr>
+          </thead>
+          <tbody   *ngIf="isReady && (rows?.length > 0)">
+              <tr *ngFor="let row of rows ;trackBy: trackId">
+                  <td *ngFor="let c of columnKeys" [class]="_.get(displayColumns, c) ? '' : 'd-none'">
+                    {{ _.get(referenceMap, [c, _.get(row, c)], _.get(row, c)) }}
+                  </td>
+                  <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                (click)="navigate(['/data', svc, prop, row.id, 'view' ])"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                (click)="navigate(['/data', svc, prop, row.id, 'edit'])"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="button" (click)="delete(row)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                  </td>
+              </tr>
+          </tbody>
+        </table>
+    </div>
+    <div [hidden]="rows?.length === 0 || !totalItems">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>
+
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete this item?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss()">
+            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button id="jhi-confirm-delete-ticket" type="submit" class="btn btn-danger"  (click)="modal.close()">
+            <fa-icon [icon]="'times'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+        </button>
+    </div>
+</ng-template>

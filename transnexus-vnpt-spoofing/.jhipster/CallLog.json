@@ -1,0 +1,100 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "vnptSpoofing",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "calling",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "called",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "requestAt",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "responseAt",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "route",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "routePrefix",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "routeLength",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dryRun",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "whitelisted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "blacklisted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "errorCode",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "errorDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "vlr",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sriAt",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "sriRespAt",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20200410135707",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "call_log",
+    "databaseType": "sql",
+    "readOnly": false,
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "microserviceName": "vnptSpoofing"
+}

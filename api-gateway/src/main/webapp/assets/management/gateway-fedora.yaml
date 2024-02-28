@@ -1,0 +1,31 @@
+- key: minio
+  fieldGroupClassName: row
+  fieldGroup:
+    - key: endpoint
+      defaultValue: 'https://play.min.io'
+      type: input
+      className: col-md-4
+      templateOptions:
+        label: Endpoint
+        description: Minio API Endpoint
+    - key: accessKey
+      defaultValue: 'Q3AM3UQ867SPQQA43P2F'
+      type: input
+      className: col-md-4
+      templateOptions:
+        label: AccessKey
+        description: Minio API AccessKey
+    - key: secretKey
+      defaultValue: 'zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG'
+      type: input
+      className: col-md-4
+      templateOptions:
+        label: SecretKey
+        description: Minio API SecretKey
+    - key: bucketName
+      defaultValue: asiatrip
+      type: input
+      className: col-md-4
+      templateOptions:
+        label: BucketName
+        description: Minio API BucketName

@@ -1,0 +1,14 @@
+<div class="container-fluid" *ngIf="isReady">
+    <div class="row equal-height" *ngFor="let row3 of sites">
+        <div class="col-6 col-lg-1 col-md-2" *ngFor="let item of row3; trackBy: trackId">
+            <div class="card mb-3 nav-link p-0">
+                <div class="card-body text-center" *ngIf="item.meta">
+                    <img [src]="getLogoSrc(item.meta.logo)" class="img-thumbnail" />
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-block" [innerHtml]="item.name"  [routerLink]="['site', item.slug]"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

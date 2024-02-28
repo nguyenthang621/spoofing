@@ -1,0 +1,30 @@
+<div>
+    <h2 id="page-heading">
+        Settings
+        <button class="btn btn-primary float-right" (click)="refresh()">
+            <fa-icon [icon]="'sync'"></fa-icon> <span jhiTranslate="gateway.refresh.button">Refresh</span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br />
+    <div class="row justify-content-between">
+        <div class="col-md-9">
+            <div class="card" *ngFor="let row of fields | keyvalue">
+                <div class="card-header">
+                    {{ row.key }}
+                </div>
+                <div class="card-body" *ngIf="settings[row.key]">
+                    <formly-form [model]="settings[row.key]" [fields]="row.value"></formly-form>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" id="save-entity" (click)="save(row.key)" class="btn btn-primary">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" *ngIf="debug">
+            <pre><code [innerHTML]="settings | json"></code></pre>
+        </div>
+    </div>
+</div>

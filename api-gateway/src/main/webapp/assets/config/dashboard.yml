@@ -1,0 +1,17 @@
+# Dashboard Component on Home page
+- name: Routing Rules
+  url: /data/spoofing-management/routing-rules
+  icon: fast-forward
+  authority: ROLE_ADMIN
+- name: Whitelist
+  url: /data/spoofing-management/whitelist
+  icon: shield-alt
+  authority: ROLE_ADMIN
+- name: Blacklist
+  url: /data/spoofing-management/blacklist
+  icon: ban
+  authority: ROLE_ADMIN
+- name: CDRs
+  url: /data/spoofing-management/cdrs
+  icon: phone
+  authority: ROLE_ADMIN

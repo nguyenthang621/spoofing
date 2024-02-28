@@ -1,0 +1,36 @@
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration debug="false">
+
+	<!--Console appender -->
+	<appender name="stdout"
+		class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Rolling appenders -->
+	<appender name="logfile" class="org.apache.log4j.rolling.RollingFileAppender">
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+			<param name="ActiveFileName" value="logs/ss7-connector.log" />
+			<param name="FileNamePattern" value="logs/ss7-connector.%d{yyyyMMddHH}.gz" />
+		</rollingPolicy>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+
+	<!--Override log level for specified package -->
+	<category name="com.juno.ss7">
+		<priority value="INFO" />
+	</category>
+
+	<root>
+		<level value="DEBUG" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="logfile" />
+	</root>
+
+</log4j:configuration>

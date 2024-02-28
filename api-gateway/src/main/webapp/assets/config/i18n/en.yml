@@ -1,0 +1,22 @@
+# /management/forms/i18n/en
+title: White Label
+apiEndpoint: /api/public/static/en.json
+fields:
+  - key: global.title
+    type: input
+    templateOptions:
+      label: Global Title
+      description: Application Short Name
+  - key: home.title
+    type: input
+    templateOptions:
+      label: Application Full name
+  - key: home.subtitle
+    type: input
+    templateOptions:
+      label: Slogan
+  - key: footer
+    type: input
+    defaultValue: 'Copyright ©'
+    templateOptions:
+      label: Footer Copyright

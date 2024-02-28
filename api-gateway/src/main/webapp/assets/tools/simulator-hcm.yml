@@ -1,0 +1,28 @@
+title: Call Fraud Management Simulator
+hideBtn: true
+fields:
+  - key: calling
+    type: input
+    templateOptions:
+      label: Calling Number
+      description: CallerID Number
+  - key: called
+    type: input
+    templateOptions:
+      label: Called Number
+      description: Called Number
+  - key: response
+    type: button
+    expressionProperties:
+      templateOptions.body: "_.pick(model, ['calling', 'called'])"
+    templateOptions:
+      label: Call Simulate
+      icon: paper-plane
+      apiEndpoint: /services/spoofing-hcm/api/lookup-result
+      body:
+  - key: result
+    type: template
+    expressionProperties:
+      templateOptions.innerHTML: 'model.p2a && _.template(''<p class="my-3 alert alert-success">Found P2A route <br>Short code: <code>${ p2a.shortCode } length ${ p2a.shortCodeLength }</code> <br> MSISDN range: <code>${ p2a.msisdn } length ${ p2a.msisdnLength }</code> <br> SMPP Account: <code>${ account.name }</code></p>'')(model.p2a)'
+    templateOptions:
+      innerHTML:

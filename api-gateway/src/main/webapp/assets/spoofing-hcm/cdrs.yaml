@@ -1,0 +1,126 @@
+title:
+  index: Call Detail Records
+  view: View CDR
+apiEndpoint: /services/spoofing-hcm/api/cdrs
+predicate: 'createdAt'
+ascending: false
+columns:
+  - prop: calling
+    label: Calling
+  - prop: called
+    label: Called
+  - prop: state
+    label: State
+    options:
+      - value: 1
+        label: Bypass
+      - value: 42
+        label: Block
+  - prop: createdAt
+    label: Created At
+  - requestAt
+  - responseAt
+  - vlr
+  - sriAt
+  - sriRespAt
+  - whitelist
+  - blacklist
+  - route
+  - routePrefix
+  - routeLength
+  - errorCode
+  - errorDesc
+fields:
+  - fieldGroupClassName: row
+    fieldGroup:
+      - key: calling
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: Calling
+          required: true
+      - key: called
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: Called
+          required: true
+  - fieldGroupClassName: row
+    fieldGroup:
+      - key: state
+        type: select
+        className: col-md-6
+        templateOptions:
+          label: State
+          required: true
+          options:
+            - value: 1
+              label: Bypass
+            - value: 42
+              label: Block
+      - key: createdAt
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: Created At
+          required: true
+      - key: requestAt
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: RequestAt
+      - key: responseAt
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: ResponseAt
+      - key: vlr
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: Vlr
+      - key: sriAt
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: SriAt
+      - key: sriRespAt
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: SriRespAt
+      - key: whitelist
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: Whitelist
+      - key: blacklist
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: Blacklist
+      - key: route
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: Route
+      - key: routePrefix
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: RoutePrefix
+      - key: routeLength
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: RouteLength
+      - key: errorCode
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: ErrorCode
+      - key: errorDesc
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: ErrorDesc

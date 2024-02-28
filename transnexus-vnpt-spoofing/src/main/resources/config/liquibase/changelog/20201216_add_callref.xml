@@ -1,0 +1,45 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="system" id="1608089422930-1">
+        <addColumn tableName="call_log">
+        	<column name="callref" type="varchar(36)"/>
+    	</addColumn>
+    	<createIndex tableName="call_log" indexName="callref_idx">
+    		<column name="callref"></column>
+    	</createIndex>
+    </changeSet>
+    
+    <!--
+        Added the entity CallLog.
+    -->
+    <changeSet id="1608089422930-2" author="system">
+        <createTable tableName="connector_log">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="callref" type="varchar(36)">
+                <constraints nullable="false" />
+            </column>
+            <column name="request_channel" type="varchar(20)"/>
+            <column name="request_instance" type="varchar(40)"/>
+            <column name="request_at" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="response_at" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="jitter" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="error_code" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="error_desc" type="varchar(255)"/>
+            <column name="request_params" type="clob"/>
+            <column name="request_body" type="clob"/>
+            <column name="response_payload" type="clob"/>
+        </createTable>
+        <dropDefaultValue tableName="connector_log" columnName="request_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="connector_log" columnName="response_at" columnDataType="datetime"/>
+    </changeSet>
+</databaseChangeLog>

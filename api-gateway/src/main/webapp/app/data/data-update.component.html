@@ -1,0 +1,33 @@
+<div class="row justify-content-center" *ngIf="isReady">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                <div class="card-header bg-gradient-primary text-white" id="jhi-data-heading">
+                  <span *ngIf="!title" [jhiTranslate]="'createOrEditData'"></span>
+                  <span *ngIf="title" [innerHtml]="title"></span>
+                </div>
+                <div class="card-body">
+                    <jhi-alert-error></jhi-alert-error>
+                    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="editForm"></formly-form>
+                </div>
+                <div class="card-footer">
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary float-right">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-4" *ngIf="debug">
+      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+        <ngb-panel title="Main Model">
+          <ng-template ngbPanelContent>
+            <pre class="bg-white">{{ options.formState.mainModel | json }}</pre>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+</div>

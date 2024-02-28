@@ -1,0 +1,19 @@
+<div class="card" *ngIf="healthIndicator">
+  <div class="card-header">
+    <span class="badge" [ngClass]="getBadgeClass(healthIndicator.status)" [innerHTML]="healthIndicator.status"></span>
+    <span [innerHTML]="healthIndicator.name"></span>
+  </div>
+    <div class="card-body">
+      <p [innerHTML]="output" class="alert alert-info"></p>
+      <ul *ngIf="properties" class="list-unstyled">
+        <li *ngFor="let m of properties | keyvalue" class="d-flex justify-content-between">
+          <strong [innerHTML]="m.key"></strong>
+          <code [innerHTML]="m.value"></code>
+        </li>
+      </ul>
+      <div [innerHTML]="metadata"></div>
+    </div>
+    <div class="card-footer">
+      <span class="badge badge-info mr-1" *ngFor="let tag of healthIndicator.serviceTags" [innerHTML]="tag"></span>
+    </div>
+</div>

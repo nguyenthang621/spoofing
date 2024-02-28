@@ -1,0 +1,94 @@
+# WebCONTENT_TYPE Configurations
+title: Content Types
+apiEndpoint: /api/nodes
+queryParams:
+  type: CONTENT_TYPE
+createOrEditData: "Add / Update Content Type"
+importApiEndpoint: /api/nodes/import
+predicate: 'createdAt'
+reverse: true
+actions:
+  - icon: file-download
+    name: Export YAML
+    url: /spaces/site/${slug}
+    className: success
+columns:
+  - prop: name
+    label: Name
+    pattern: ci(contains(${ term }))
+  - prop: slug
+    label: Code
+    pattern: startsWith(${ term })
+  - prop: state
+    label: Status
+    options:
+      - value: 200
+        label: Enable
+      - value: 423
+        label: Disabled
+      - value: 502
+        label: Temporary Unavailable
+  - prop: meta.icon
+    label: Icon
+    template: '<i class="fas fa-${ meta.icon }"></i> ${ meta.icon }'
+fields:
+  # Hidden attribute since we use the node table to host this info
+  - key: type
+    type: input
+    hideExpression: true
+    defaultValue: CONTENT_TYPE
+  # Entity information
+  - fieldGroupClassName: row
+    fieldGroup:
+      - key: name
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: Content Type
+          required: true
+      - key: slug
+        type: input
+        className: col-md-2
+        templateOptions:
+          label: Code
+          description: Each content type should be handle by one API Endpoint. This is the URL segment dedicated for this content type
+      - key: state
+        type: select
+        className: col-md-2
+        templateOptions:
+          label: Status
+          description: Only CONTENT_TYPEs with status Enable will be accessible by ROLE_USER
+          options:
+            - value: 200
+              label: Enable
+            - value: 423
+              label: Disabled
+            - value: 502
+              label: Temporary Unavailable
+      - key: tags
+        type: ng-select
+        className: col-md-2
+        templateOptions:
+          label: Sites
+          description: List of sites that use this node
+          apiEndpoint: /api/nodes
+          multiple: true
+          hideSelected: true
+          params:
+            type: SITE
+          key: id
+          val: name
+          termPattern: ci(contains(${term}))
+  - key: meta
+    fieldGroup:
+      - key: icon
+        type: input
+        templateOptions:
+          label: Icon
+          description: A fontawesome icon for this content type
+
+      - key: remark
+        type: textarea
+        templateOptions:
+          label: Remark
+          description: Notes that should appear on content type grid view

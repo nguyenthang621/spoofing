@@ -1,0 +1,60 @@
+# Microservice JWT Keys
+- key: jhipster.security.authentication.jwt.base64-secret
+  type: input
+  templateOptions:
+    label: JWT Key
+    description: JWT Key for Authorization
+
+# Email Settings
+- key: spring.mail.host
+  defaultValue: smtp.gmail.com
+  type: input
+  templateOptions:
+    jhiTranslate: spring.mail.host
+- key: spring.mail.port
+  defaultValue: 587
+  type: input
+  templateOptions:
+    jhiTranslate: spring.mail.port
+- key: spring.mail.username
+  defaultValue: username
+  type: input
+  templateOptions:
+    jhiTranslate: spring.mail.username
+- key: spring.mail.password
+  defaultValue: password
+  type: input
+  templateOptions:
+    jhiTranslate: spring.mail.password
+- key: spring.mail.properties.mail.smtp.auth
+  defaultValue: true
+  type: checkbox
+  templateOptions:
+    label: spring.mail.properties.mail.smtp.auth
+- key: spring.mail.properties.mail.smtp.starttls.enable
+  defaultValue: true
+  type: checkbox
+  templateOptions:
+    label: spring.mail.properties.mail.smtp.starttls.enable
+
+# Minio configuration
+- key: minio
+  fieldGroup:
+    # File Upload configuration
+    - key: endpoint
+      defaultValue: https://play.min.io
+      templateOptions:
+        jhiLabel: endpoint
+    - key: accessKey
+      defaultValue: Q3AM3UQ867SPQQA43P2F
+      templateOptions:
+        jhiLabel: accessKey
+    - key: secretKey
+      defaultValue: zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
+      templateOptions:
+        jhiLabel: secretKey
+        type: password
+    - key: bucketName
+      defaultValue: hohuy
+      templateOptions:
+        jhiLabel: bucketName

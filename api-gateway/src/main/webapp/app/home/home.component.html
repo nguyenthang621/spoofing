@@ -1,0 +1,16 @@
+<div [ngSwitch]="isAuthenticated()">
+
+    <jhi-login *ngSwitchCase="false"></jhi-login>
+
+    <div *ngSwitchCase="true">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="embed-responsive embed-responsive-21by9">
+                        <iframe class="embed-responsive-item" src="/grafana/d/DCiMWYCWk/vnpt_poc_spoofing?orgId=3&refresh=5m&kiosk" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

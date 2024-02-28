@@ -1,0 +1,17 @@
+# Remote form for text fields
+fields:
+  - key: meta.required
+    type: checkbox
+    templateOptions:
+      label: Required
+  - key: meta.minlength
+    type: input
+    defaultValue: 0
+    templateOptions:
+      label: Minimum Lenght
+      type: number
+  - key: meta.maxlength
+    type: input
+    templateOptions:
+      label: Maximum Lenght
+      type: number

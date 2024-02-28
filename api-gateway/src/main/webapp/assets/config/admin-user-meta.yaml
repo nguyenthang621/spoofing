@@ -1,0 +1,17 @@
+fields:
+  - key: address
+    type: input
+    templateOptions:
+       label: Address
+  - key: bio
+    type: quill
+    templateOptions:
+       label: Biography
+  - key: avatar
+    type: file-gridfs
+    wrappers: ['form-field']
+    templateOptions:
+       label: Avatar
+       className: img-thumb
+       isImage: true
+       maxFiles: 1

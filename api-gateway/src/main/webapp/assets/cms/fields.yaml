@@ -1,0 +1,338 @@
+# WebFIELD Configurations
+title: Fields
+apiEndpoint: /api/nodes
+queryParams:
+  type: FIELD
+createOrEditData: "Add / Update Fields"
+importApiEndpoint: /api/nodes/import
+predicate: 'createdAt'
+reverse: true
+columns:
+  - prop: name
+    label: Name
+    pattern: ci(contains(${ term }))
+  - prop: slug
+    label: Code
+    pattern: startsWith(${ term })
+  - prop: state
+    label: Status
+    options:
+      - value: 200
+        label: Enable
+      - value: 423
+        label: Disabled
+      - value: 502
+        label: Temporary Unavailable
+  - prop: tags
+    label: Content Types
+    apiEndpoint: /api/nodes
+    params:
+      type: CONTENT_TYPE
+    key: id
+    val: name
+fields:
+  # Hidden attribute since we use the node table to host this info
+  - key: type
+    type: input
+    hideExpression: true
+    defaultValue: FIELD
+  # Entity information
+  - fieldGroupClassName: row
+    fieldGroup:
+      - key: name
+        type: input
+        className: col-md-4
+        templateOptions:
+          label: Field Label
+          required: true
+      - key: slug
+        type: input
+        className: col-md-2
+        templateOptions:
+          label: Field Key
+          description: The key used to render form. Should be unique per Content Type.
+          required: true
+      - key: state
+        type: select
+        className: col-md-2
+        defaultValue: 200
+        templateOptions:
+          label: Status
+          description: Only FIELDs with status Enable will be accessible by ROLE_USER
+          required: true
+          options:
+            - value: 200
+              label: Enable
+            - value: 423
+              label: Disabled
+            - value: 502
+              label: Temporary Unavailable
+      - key: tags
+        type: ng-select
+        className: col-md-4
+        templateOptions:
+          label: Content Type
+          description: This fields should appear on this content type
+          apiEndpoint: /api/nodes
+          required: true
+          multiple: true
+          hideSelected: true
+          params:
+            type: CONTENT_TYPE
+          key: id
+          val: name
+# Template Options
+  - key: meta
+    fieldGroupClassName: row
+    fieldGroup:
+      - key: type
+        type: select
+        className: col-md-2
+        defaultValue: 'input'
+        templateOptions:
+          label: Field Type
+          description: The form control to display
+          options:
+            - value: input
+              label: Input
+            - value: textarea
+              label: Text Area
+            - value: select
+              label: Select
+            - value: quill
+              label: Quill
+            - value: template
+              label: Template
+            - value: button
+              label: Button
+            - value: time
+              label: Time Picker
+            - value: date
+              label: Date Picker
+            - value: datetime
+              label: Date Time Picker
+            - value: file-gridfs
+              label: File Gridfs
+            - value: file-upload
+              label: File Upload
+            - value: slider
+              label: Slider
+            - value: ng-select
+              label: Reference Lookup
+            - value: tags
+              label: Tags
+            - value: repeat
+              label: Repeat
+            - value: crud-table
+              label: Crud Table
+            - value: remote-form
+              label: Remote Form
+      - key: templateOptions.description
+        type: input
+        className: col-md-10
+        templateOptions:
+          label: Description
+          description: A help text appear below the text field
+  - hideExpression: 'formState.mainModel.meta.type !== "input"'
+    fieldGroup:
+      - key: meta.templateOptions.required
+        type: checkbox
+        templateOptions:
+          label: Required
+      - key: meta.templateOptions.minlength
+        type: input
+        defaultValue: 0
+        templateOptions:
+          label: Minimum Lenght
+          type: number
+      - key: meta.templateOptions.maxlength
+        type: input
+        templateOptions:
+          label: Maximum Lenght
+          type: number
+      - key: meta.templateOptions.type
+        type: select
+        defaultValue: text
+        templateOptions:
+          label: Input Type
+          options:
+            - label: checkbox
+              value: checkbox
+            - label: color
+              value: color
+            - label: date
+              value: date
+            - label: datetime
+              value: datetime
+            - label: email
+              value: email
+            - label: file
+              value: file
+            - label: hidden
+              value: hidden
+            - label: image
+              value: image
+            - label: month
+              value: month
+            - label: number
+              value: number
+            - label: password
+              value: password
+            - label: radio
+              value: radio
+            - label: range
+              value: range
+            - label: reset
+              value: reset
+            - label: search
+              value: search
+            - label: tel
+              value: tel
+            - label: text
+              value: text
+            - label: time
+              value: time
+            - label: url
+              value: url
+            - label: week
+              value: wee
+
+  - hideExpression: 'formState.mainModel.meta.type !== "textarea"'
+    fieldGroup:
+      - key: meta.templateOptions.required
+        type: checkbox
+        templateOptions:
+          label: Required
+      - key: meta.templateOptions.minlength
+        type: input
+        defaultValue: 0
+        templateOptions:
+          label: Minimum Lenght
+          type: number
+      - key: meta.templateOptions.maxlength
+        type: input
+        templateOptions:
+          label: Maximum Lenght
+          type: number
+      - key: meta.templateOptions.cols
+        type: input
+        defaultValue: 80
+        templateOptions:
+          label: Columns
+          type: number
+      - key: meta.templateOptions.rows
+        type: input
+        defaultValue: 5
+        templateOptions:
+          label: Rows
+          type: number
+
+  - hideExpression: 'formState.mainModel.meta.type !== "select"'
+    fieldGroup:
+      - key: meta.templateOptions.multiple
+        type: checkbox
+        templateOptions:
+          label: Multiple
+      - key: meta.templateOptions.options
+        type: repeat
+        templateOptions:
+          label: Options
+          addText: Add Option
+        fieldArray:
+          fieldGroupClassName: row
+          fieldGroup:
+            - key: value
+              type: input
+              className: col-md-6
+              templateOptions:
+                label: Value
+            - key: label
+              type: input
+              className: col-md-6
+              templateOptions:
+                label: Label
+
+  - hideExpression: 'formState.mainModel.meta.type !== "template"'
+    fieldGroup:
+      - key: meta.templateOptions.innerHTML
+        type: quill
+        templateOptions:
+          label: Inner HTML
+          description: You can use the placeholder <%= model.attribute %> or ${ model.attribute } as a placeholder
+
+  - hideExpression: 'formState.mainModel.meta.type !== "datetime"'
+    fieldGroup:
+      - key: meta.templateOptions.displayFormat
+        type: input
+        templateOptions:
+          label: Display Format
+          description: Display format in input. Default `YYYY-MM-DDTHH:mm:ssZ`.
+      - key: meta.templateOptions.format
+        type: input
+        templateOptions:
+          label: Value format
+          description: Value to store to send to backend
+  - hideExpression: 'formState.mainModel.meta.type !== "file-gridfs"'
+    fieldGroup:
+      - key: meta.templateOptions.apiEndpoint
+        type: input
+        defaultValue: api/minio
+        templateOptions:
+          label: API Endpoint
+          description: API Endpoint to handle file upload.
+      - key: meta.templateOptions.maxFiles
+        type: input
+        templateOptions:
+          type: number
+          label: Maximum File
+          description: Maximum file allowed to upload
+      - key: meta.templateOptions.fileSrc
+        type: input
+        defaultValue: /api/public/static/${fileId}
+        templateOptions:
+          label: File source
+          description: Template to render file source. Using ${fileId} as the file id return by api endpoint
+      - key: meta.templateOptions.isImage
+        type: checkbox
+        templateOptions:
+          label: Is Image
+          description: Check to render image
+
+  - hideExpression: 'formState.mainModel.meta.type !== "file-upload"'
+    fieldGroup:
+      - key: meta.templateOptions.apiEndpoint
+        type: input
+        defaultValue: api/minio
+        templateOptions:
+          label: API Endpoint
+          description: API Endpoint to handle file upload.
+      - key: meta.templateOptions.fileSrc
+        type: input
+        defaultValue: /api/public/static/${fileId}
+        templateOptions:
+          label: File source
+          description: Template to render file source. Using ${fileId} as the file id return by api endpoint
+      - key: meta.templateOptions.isImage
+        type: checkbox
+        templateOptions:
+          label: Is Image
+          description: Check to render image
+
+  - hideExpression: 'formState.mainModel.meta.type !== "ng-select"'
+    fieldGroup:
+      - key: meta.templateOptions.apiEndpoint
+        type: input
+        defaultValue: api/minio
+        templateOptions:
+          label: API Endpoint
+          description: API Endpoint to retrieve options
+      - key: meta.templateOptions.multiple
+        type: checkbox
+        templateOptions:
+          label: Multiple
+          description: Check to allow select multiple
+      - key: meta.templateOptions.hideSelected
+        type: checkbox
+        templateOptions:
+          label: Hide Selected
+          description: Check to hide selected

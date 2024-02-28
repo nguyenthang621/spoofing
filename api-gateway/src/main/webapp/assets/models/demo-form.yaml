@@ -1,0 +1,66 @@
+# In order to let all translation works, please create another file in `i18n/{language}/demo-form.json`
+# "demo-form": {"key": "label"}
+# All attribute display in /index endpoint
+
+# For those with QuerydslBindingCustomizer repository
+filterOperators:
+  # - eq
+  # - ne
+  # - contains
+  # - ci
+  # - startsWith
+  # - endsWith
+  # - matches
+  # - gt
+  # - gte
+  # - lt
+  # - lte
+  # - or
+  # - and
+  # - not
+columns:
+  - name
+  - description
+  - state
+# Form to display in CREATE and UPDATE
+fields:
+  - key: name
+    type: input
+    templateOptions:
+      label: Name
+      placeholder: Service Provider Name
+  - key: description
+    type: quill
+    templateOptions:
+      label: Description
+      apiEndpoint: /api/minio
+      fileSrc: /api/public/download-file?name=${fileId}
+      # styles:
+      #   height: 150px
+  - key: state
+    type: select
+    templateOptions:
+      label: Status
+      options:
+        - value: '200'
+          label: OK
+        - value: '403'
+          label: Forbidden
+        - value: '402'
+          label: Payment Required
+        - value: '503'
+          label: Service Unavailable
+      multiple: false
+      required: true
+  - key: contact.email
+    type: input
+    templateOptions:
+      label: Email
+  - key: contact.address
+    type: input
+    templateOptions:
+      label: Address
+  - key: contact.fax
+    type: input
+    templateOptions:
+      label: Fax

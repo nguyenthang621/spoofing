@@ -1,0 +1,291 @@
+[
+  {
+    "value": 34,
+    "group": "Generic errors",
+    "label": "34 - System failure"
+  },
+  {
+    "value": 35,
+    "group": "Generic errors",
+    "label": "35 - Data Missing"
+  },
+  {
+    "value": 36,
+    "group": "Generic errors",
+    "label": "36 - Unexpected Data Value"
+  },
+  {
+    "value": 21,
+    "group": "Generic errors",
+    "label": "21 - Facility Not Supported"
+  },
+  {
+    "value": 28,
+    "group": "Generic errors",
+    "label": "28 - Incompatible Terminal"
+  },
+  {
+    "value": 51,
+    "group": "Generic errors",
+    "label": "51 - Resource Limitation"
+  },
+  {
+    "value": 1,
+    "group": "Identification and Numbering Errors",
+    "label": "1 - Unknown Subscriber"
+  },
+  {
+    "value": 144,
+    "group": "Identification and Numbering Errors",
+    "label": "144 - Number Changed"
+  },
+  {
+    "value": 3,
+    "group": "Identification and Numbering Errors",
+    "label": "3 - Unknown MSC"
+  },
+  {
+    "value": 5,
+    "group": "Identification and Numbering Errors",
+    "label": "5 - Unidentified Subscriber"
+  },
+  {
+    "value": 7,
+    "group": "Identification and Numbering Errors",
+    "label": "7 - Unknown Equipment"
+  },
+  {
+    "group": "Subscription Errors",
+    "value": 8,
+    "label": "08 - Roaming Not Allowed"
+  },
+  {
+    "group": "Subscription Errors",
+    "value": 9,
+    "label": "09 - Illegal Subscriber"
+  },
+  {
+    "group": "Subscription Errors",
+    "value": 12,
+    "label": "12 - Illegal Equipment"
+  },
+  {
+    "group": "Subscription Errors",
+    "value": 10,
+    "label": "10 - Bearer Service Not Provisioned"
+  },
+  {
+    "group": "Subscription Errors",
+    "value": 11,
+    "label": "11 - Teleservice Not Provisioned"
+  },
+
+  {
+    "group": "Handover Errors",
+    "value": 25,
+    "label": "25 - No Handover Number Available"
+  },
+  {
+    "group": "Handover Errors",
+    "value": 26,
+    "label": "26 - Subsequent Handover Failure"
+  },
+  {
+    "group": "Handover Errors",
+    "value": 42,
+    "label": "42 - Target Cell Outside GroupCall Area"
+  },
+
+  {
+    "group": "Operation and Maintenance Errors",
+    "value": 40,
+    "label": "40 - tracingBufferFull"
+  },
+
+  {
+    "group": "Call Handling Errors",
+    "value": 39,
+    "label": "39 - No Roaming Number Available"
+  },
+  {
+    "group": "Call Handling Errors",
+    "value": 27,
+    "label": "27 - Absent Subscriber"
+  },
+  {
+    "group": "Call Handling Errors",
+    "value": 45,
+    "label": "45 - Busy Subscriber"
+  },
+  {
+    "group": "Call Handling Errors",
+    "value": 46,
+    "label": "46 - No Subscriber Reply"
+  },
+  {
+    "group": "Call Handling Errors",
+    "value": 13,
+    "label": "13 - Call Barred"
+  },
+  {
+    "group": "Call Handling Errors",
+    "value": 14,
+    "label": "14 - Forwarding Violation"
+  },
+  {
+    "group": "Call Handling Errors",
+    "value": 47,
+    "label": "47 - Forwarding Failed"
+  },
+  {
+    "group": "Call Handling Errors",
+    "value": 15,
+    "label": "15 - CUG Reject"
+  },
+  {
+    "group": "Call Handling Errors",
+    "value": 48,
+    "label": "48 - OR Not Allowed"
+  },
+
+  {
+    "group": "Any Time Interrogation Errors",
+    "value": 49,
+    "label": "49 - ATI Not Allowed"
+  },
+
+  {
+    "group": "Any Time Information Handling Errors",
+    "value": 60,
+    "label": "60 - ATSI Not Allowed"
+  },
+  {
+    "group": "Any Time Information Handling Errors",
+    "value": 61,
+    "label": "61 - ATM Not Allowed"
+  },
+  {
+    "group": "Any Time Information Handling Errors",
+    "value": 62,
+    "label": "62 - Information Not Available"
+  },
+
+  {
+    "group": "Supplementary Service Errors",
+    "value": 16,
+    "label": "16 - Illegal SS Operation"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 17,
+    "label": "17 - SS Error Status"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 18,
+    "label": "18 - SS Not Available"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 19,
+    "label": "19 - SS Subscription Violation"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 20,
+    "label": "20 - SS Incompatibility"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 71,
+    "label": "71 - Unknown Alphabet"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 72,
+    "label": "72 - USSD Busy"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 37,
+    "label": "37 - PW Registration Failure"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 38,
+    "label": "38 - Negative PW Check"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 43,
+    "label": "43 - Number of PW Attempts Violation"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 29,
+    "label": "29 - ShortTerm Denial"
+  },
+  {
+    "group": "Supplementary Service Errors",
+    "value": 30,
+    "label": "30 - LongTerm Denial"
+  },
+
+  {
+    "group": "Short Message Service Errors",
+    "value": 31,
+    "label": "31 - Subscriber Busy For MT SMS"
+  },
+  {
+    "group": "Short Message Service Errors",
+    "value": 32,
+    "label": "32 - SM Delivery Failure"
+  },
+  {
+    "group": "Short Message Service Errors",
+    "value": 33,
+    "label": "33 - Message Waiting List Full"
+  },
+  {
+    "group": "Short Message Service Errors",
+    "value": 6,
+    "label": "06 - Absent Subscriber for SM"
+  },
+
+  {
+    "group": "Group Call errors",
+    "value": 50,
+    "label": "50 - No GroupCall Number Available"
+  },
+  {
+    "group": "Group Call errors",
+    "value": 22,
+    "label": "22 - Ongoing GroupCall"
+  },
+
+  {
+    "group": "Location Service Errors",
+    "value": 52,
+    "label": "52 - Unauthorized Requesting Network"
+  },
+  {
+    "group": "Location Service Errors",
+    "value": 53,
+    "label": "53 - Unauthorized LCS Client"
+  },
+  {
+    "group": "Location Service Errors",
+    "value": 54,
+    "label": "54 - Position Method Failure"
+  },
+  {
+    "group": "Location Service Errors",
+    "value": 58,
+    "label": "58 - Unknown or Unreachable LCS Client"
+  },
+  {
+    "group": "Location Service Errors",
+    "value": 59,
+    "label": "59 - MM Event Not Supported"
+  }
+]

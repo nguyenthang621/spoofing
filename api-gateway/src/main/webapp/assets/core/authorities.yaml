@@ -1,0 +1,79 @@
+title: User Roles
+apiEndpoint: /api/authorities
+# queryParams:
+#   sites: GATEWAY
+columns:
+  - prop: id
+    label: Name
+  - prop: sites
+    label: Sites
+  - prop: meta.description
+    label: Description
+
+fields:
+  - key: name
+    type: input
+    templateOptions:
+      label: Name
+      required: true
+      pattern: ^([\w_-]+)$
+  - key: sites
+    type: tags
+    wrappers: ['form-field']
+    templateOptions:
+      label: Sites
+      description: If specified, this role will only available to the selected app
+      # FIXME: Fill in the available microservices for this project. Check on `/api/gateway/routes` in gateway for more info
+  - key: meta
+    fieldGroup:
+      - key: description
+        type: textarea
+        wrappers: ['form-field']
+        templateOptions:
+          label: Description
+          description: A short description for this role
+          cols: 80
+          rows: 3
+  - key: permissions
+    type: ng-select
+    wrappers: ['form-field']
+    templateOptions:
+      label: Menu Items
+      description: The menu items configuration for the class
+      hideSelected: true
+      multiple: true
+      key: url
+      val: name
+      # We should copy the navbar.yml here
+      items:
+        - name: Demo Menu
+          icon: paste
+          url: docs/README
+          children:
+        - name: Design Guidelines
+          url: /docs/themer
+          icon: tachometer-alt
+        - name: README
+          url: /docs/README
+          icon: file
+        - name: Demo Page
+          url: /demo
+          icon: asterisk
+        - name: Demo Form
+          url: /data/models/demo-form
+          icon: file-alt
+        - name: Demo Sidebar
+          url: /data
+          icon: th-list
+          sidebarUrl: assets/config/sidebar.yml
+        - name: Alternative Sidebar
+          url: /data
+          icon: th-list
+          sidebarUrl: assets/config/sidebar-alt.yml
+        - name: Data Management
+          icon: cogs
+          url: docs/README
+          children:
+        - name: Roles
+          url: /data/core/authorities
+          icon: user-circle

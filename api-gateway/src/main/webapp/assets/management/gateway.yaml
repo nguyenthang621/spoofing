@@ -1,0 +1,46 @@
+- key: 'application.email-templates'
+  fieldGroup:
+    - fieldGroupClassName:
+      wrappers: [panel]
+      templateOptions:
+        label: Activation Email
+      fieldGroup:
+        - key: email.activation.title
+          type: input
+          templateOptions:
+            label: Subject
+        - key: en.mail.activationEmail
+          type: quill
+          templateOptions:
+            label: Activation Email Template
+            description: Email template to send to user upon account activation
+
+    - fieldGroupClassName:
+      wrappers: [panel]
+      templateOptions:
+        label: Activation Email
+      fieldGroup:
+        - key: email.creation.title
+          type: input
+          templateOptions:
+            label: Subject
+        - key: en.mail.creationEmail
+          type: quill
+          templateOptions:
+            label: Account Creation Email Template
+            description: Email template to send to user when admin create account for him
+
+    - fieldGroupClassName:
+      wrappers: [panel]
+      templateOptions:
+        label: Password Reset Email
+      fieldGroup:
+        - key: email.reset.title
+          type: input
+          templateOptions:
+            label: Subject
+        - key: en.mail.passwordResetEmail
+          type: quill
+          templateOptions:
+            label: Password Reset Email Template
+            description: Email template to send to user for password reset

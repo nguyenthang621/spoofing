@@ -1,0 +1,61 @@
+title:
+  index: Blacklist
+  view: View Blacklist ${ prefix }
+  update: Update Blacklist ${ prefix }
+  create: New Blacklist
+  delete: Delete Blacklist ${ prefix }
+apiEndpoint: /services/spoofing-hcm/api/blacklists
+predicate: 'id'
+reverse: true
+columns:
+  - prop: prefix
+    label: Prefix
+  - prop: length
+    label: Length
+  - prop: state
+    label: State
+    options:
+      - value: 200
+        label: Enable
+      - value: 403
+        label: Disable
+  - description
+fields:
+  - fieldGroupClassName: row
+    fieldGroup:
+      - key: prefix
+        type: input
+        className: col-md-6
+        templateOptions:
+          label: MSISDN
+          required: true
+          description: Number Prefixes got REJECT immediately if match
+      - key: length
+        type: input
+        wrappers:
+          - form-field
+        className: col-md-6
+        defaultValue: 0
+        templateOptions:
+          label: A Number Length
+          type: number
+          description: Source Address length to check against
+          required: true
+      - key: state
+        type: select
+        className: col-md-6
+        defaultValue: 200
+        templateOptions:
+          label: State
+          required: true
+          options:
+            - value: 200
+              label: Enable
+            - value: 403
+              label: Disable
+      - key: description
+        type: textarea
+        templateOptions:
+          label: Description
+          cols: 80
+          rows: 5

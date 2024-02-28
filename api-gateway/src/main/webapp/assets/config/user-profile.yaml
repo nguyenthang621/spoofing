@@ -1,0 +1,23 @@
+fields:
+  - key: birthday
+    type: date
+    wrappers: ['form-field']
+    templateOptions:
+       label: Birthday
+  - key: address
+    type: input
+    templateOptions:
+       label: Address
+  - key: bio
+    type: quill
+    wrappers: ['form-field']
+    templateOptions:
+       label: About Me
+  - key: avatar
+    type: file-gridfs
+    wrappers: ['form-field']
+    templateOptions:
+       label: Avatar
+       className: img-thumb
+       isImage: true
+       maxFiles: 1
