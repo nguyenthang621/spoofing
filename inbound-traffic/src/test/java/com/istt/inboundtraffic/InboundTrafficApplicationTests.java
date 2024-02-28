@@ -9,7 +9,6 @@ class InboundTrafficApplicationTests {
 	@Test
 	void contextLoads() {
 		System.out.println("--------------------------Testing DONE--------------------------");
-		assertEquals(true, true);
 	}
 
 }
