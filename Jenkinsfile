@@ -5,8 +5,8 @@ pipeline {
             steps {
                 script {
                     echo 'Starting the build process...'
-                    sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && sudo -S chmod 777 target'
-                    sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn clean install -U'
+                    // sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && sudo -S chmod 777 target'
+                    sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn clean install'
                 }
             }
         }
