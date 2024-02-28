@@ -53,7 +53,7 @@ import gov.nist.javax.sip.header.Via;
 
 public class MySipListener implements SipListener {
 
-	private String ipAddr = "192.168.10.44";
+	private String ipAddr = Constants.getHost();
 
 	private int port = 5060;
 
