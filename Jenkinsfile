@@ -2,20 +2,29 @@ pipeline {
     agent any
     
     stages {
-        stage('start') {
+        stage('Build') {
             steps {
-                echo 'Hello'
+                echo 'Starting the build process...'
+                sh 'mvn clean package'
             }
         }
-        stage('build') {
+        stage('Test') {
             steps {
-                echo 'building...'
+                echo 'Running tests...'
+                sh 'mvn test'
             }
         }
-        stage('test') {
+        stage('Deploy') {
             steps {
-                echo 'Testing...'
+                echo 'Deploying the application...'
+                sh 'java -jar inbound-traffic/target/inbound-traffic-0.0.1-SNAPSHOT.jar'
             }
+        }
+    }
+    post {
+        always {
+            echo 'Cleaning up...'
+            sh 'mvn clean'
         }
     }
 }
