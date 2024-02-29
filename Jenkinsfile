@@ -67,30 +67,29 @@ pipeline {
             steps {
                 echo 'Deploying the application...'
                 script {
-                    def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
-                    if (serviceStatus == 0) {
-                        echo 'Service inbound is running, restarting...'
-                        sh 'service inbound status'
-                    } else {
-                        echo 'Service inbound is not running, starting...'
-                        sh 'sudo -t service inbound restart'
-                        // sh 'java -jar /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/target/inbound-traffic-0.0.1-SNAPSHOT.jar &'
-                    }
+                    def expectScript = '''
+                        spawn sudo service inbound restart
+                        expect "Password:"
+                        send "abcd456789"
+                        interact
+                    '''
+                    sh 'expect -c "' + expectScript + '"'
                 }
             }
         }
     }
-        post {
-            always {
-                echo 'Checking service inbound...'
-                script {
-                    def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
-                    if (serviceStatus == 0) {
-                        echo 'Service inbound is running.'
-                    } else {
-                        echo 'Service inbound is not running.'
-                    }
+    post {
+        always {
+            echo 'Checking service inbound...'
+            script {
+                def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
+                if (serviceStatus == 0) {
+                    echo 'Service inbound is running.'
+                } else {
+                    echo 'Service inbound is not running.'
                 }
             }
         }
+    }
 }
+
