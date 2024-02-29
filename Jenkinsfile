@@ -78,6 +78,7 @@ pipeline {
                 }
             }
         }
+    }
         post {
             always {
                 echo 'Checking service inbound...'
@@ -91,5 +92,4 @@ pipeline {
                 }
             }
         }
-    }
 }
