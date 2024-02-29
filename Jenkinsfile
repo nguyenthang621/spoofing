@@ -70,9 +70,10 @@ pipeline {
                     def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
                     if (serviceStatus == 0) {
                         echo 'Service inbound is running, restarting...'
-                        sh 'service inbound restart'
+                        sh 'service inbound status'
                     } else {
                         echo 'Service inbound is not running, starting...'
+                        sh 'service inbound restart'
                         sh 'java -jar /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/target/inbound-traffic-0.0.1-SNAPSHOT.jar &'
                     }
                 }
