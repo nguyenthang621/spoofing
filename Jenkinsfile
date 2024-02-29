@@ -1,3 +1,38 @@
+// pipeline {
+//     agent any
+//     stages {
+//         stage('Build') {
+//             steps {
+//                 script {
+//                     echo 'Starting the build process...'
+//                     sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn clean install'  // for 10.0.10.153
+
+//                 }
+//             }
+//         }
+//         stage('Test') {
+//             steps {
+//                 echo 'Running tests...'
+//                 sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn test'
+//             }
+//         }
+//         stage('Deploy') {
+//             steps {
+//                 echo 'Deploying the application...'
+//                 sh 'java -jar /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/target/inbound-traffic-0.0.1-SNAPSHOT.jar &'
+//             }
+//         }
+        
+//     }
+//     // post {
+//     //     always {
+//     //         echo 'Cleaning up...'
+//     //         sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn clean'
+//     //     }
+//     // }
+// }
+
+
 pipeline {
     agent any
     stages {
@@ -5,8 +40,7 @@ pipeline {
             steps {
                 script {
                     echo 'Starting the build process...'
-                    sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn clean install'  // for 10.0.10.153
-
+                    sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn clean install'
                 }
             }
         }
@@ -16,17 +50,33 @@ pipeline {
                 sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn test'
             }
         }
+        stage('Check service inbound') {
+            steps {
+                echo 'Checking service inbound...'
+                script {
+                    def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
+                    if (serviceStatus == 0) {
+                        echo 'Service inbound is running.'
+                    } else {
+                        error 'Service inbound is not running.'
+                    }
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                sh 'java -jar /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/target/inbound-traffic-0.0.1-SNAPSHOT.jar &'
+                script {
+                    def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
+                    if (serviceStatus == 0) {
+                        echo 'Service inbound is running, restarting...'
+                        sh 'service inbound restart'
+                    } else {
+                        echo 'Service inbound is not running, starting...'
+                        sh 'java -jar /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/target/inbound-traffic-0.0.1-SNAPSHOT.jar &'
+                    }
+                }
             }
         }
     }
-    // post {
-    //     always {
-    //         echo 'Cleaning up...'
-    //         sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn clean'
-    //     }
-    // }
 }
