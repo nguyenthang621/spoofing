@@ -73,7 +73,7 @@ pipeline {
                         sh 'service inbound status'
                     } else {
                         echo 'Service inbound is not running, starting...'
-                        sh 'sudo service inbound restart'
+                        sh 'sudo -t service inbound restart'
                         // sh 'java -jar /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/target/inbound-traffic-0.0.1-SNAPSHOT.jar &'
                     }
                 }
