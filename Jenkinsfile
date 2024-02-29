@@ -67,13 +67,13 @@ pipeline {
             steps {
                 echo 'Deploying the application...'
                 script {
-                    def remote = [:]
-                    remote.name = 'spoofing'
-                    remote.host = '192.168.10.44'
-                    remote.user = 'rnd'
-                    remote.password = 'abcd456789'
-                    remote.allowAnyHosts = true
-                    sshCommand remote: remote, command: "sudo systemctl restart inbound"
+                    def expectScript = '''
+                        spawn sudo systemctl restart inbound
+                        expect "Password:"
+                        send "abcd456789"
+                        expect eof
+                    '''
+                    sh 'expect -c "' + expectScript + '"'
                     // check status service
                     def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
                     if (serviceStatus == 0) {
