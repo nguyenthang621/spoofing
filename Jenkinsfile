@@ -74,6 +74,7 @@ pipeline {
                     //     expect eof
                     // '''
                     // sh 'expect -c "' + expectScript + '"'
+                    sh 'whoami'
                     sh 'sudo systemctl restart inbound'
                     // check status service
                     def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
