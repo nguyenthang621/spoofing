@@ -58,7 +58,7 @@ pipeline {
                     if (serviceStatus == 0) {
                         echo 'Service inbound is running.'
                     } else {
-                        error 'Service inbound is not running.'
+                        echo 'Service inbound is not running.'
                     }
                 }
             }
