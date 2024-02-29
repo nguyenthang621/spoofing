@@ -74,7 +74,7 @@ pipeline {
                     } else {
                         echo 'Service inbound is not running, starting...'
                         sh 'service inbound restart'
-                        sh 'java -jar /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/target/inbound-traffic-0.0.1-SNAPSHOT.jar &'
+                        // sh 'java -jar /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/target/inbound-traffic-0.0.1-SNAPSHOT.jar &'
                     }
                 }
             }
