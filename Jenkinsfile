@@ -68,12 +68,19 @@ pipeline {
                 echo 'Deploying the application...'
                 script {
                     def expectScript = '''
-                        spawn sudo service inbound restart
+                        sudo systemctl restart inbound
                         expect "Password:"
                         send "abcd456789"
                         interact
                     '''
                     sh 'expect -c "' + expectScript + '"'
+                    // check status service
+                    def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
+                    if (serviceStatus == 0) {
+                        echo 'Service inbound start success.'
+                    } else {
+                        error 'Service inbound start fail.'
+                    }
                 }
             }
         }
