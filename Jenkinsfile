@@ -70,7 +70,7 @@ pipeline {
                     def expectScript = '''
                         spawn sudo -S systemctl restart inbound
                         expect "Password:"
-                        send "abcd456789\r"
+                        send "abcd456789"
                         expect eof
                     '''
                     sh 'expect -c "' + expectScript + '"'
