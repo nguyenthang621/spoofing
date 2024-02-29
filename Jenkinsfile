@@ -67,13 +67,14 @@ pipeline {
             steps {
                 echo 'Deploying the application...'
                 script {
-                    def expectScript = '''
-                        spawn sudo systemctl restart inbound
-                        expect "Password:"
-                        send "abcd456789"
-                        expect eof
-                    '''
-                    sh 'expect -c "' + expectScript + '"'
+                    // def expectScript = '''
+                    //     spawn sudo systemctl restart inbound
+                    //     expect "Password:"
+                    //     send "abcd456789"
+                    //     expect eof
+                    // '''
+                    // sh 'expect -c "' + expectScript + '"'
+                    sh 'sudo systemctl restart inbound'
                     // check status service
                     def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
                     if (serviceStatus == 0) {
