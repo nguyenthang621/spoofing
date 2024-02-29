@@ -50,7 +50,7 @@ pipeline {
                 sh 'cd /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/ && /opt/apache-maven-3.9.6/bin/mvn test'
             }
         }
-        stage('Check service inbound') {
+        stage('Check service inbound is running') {
             steps {
                 echo 'Checking service inbound...'
                 script {
@@ -74,6 +74,19 @@ pipeline {
                     } else {
                         echo 'Service inbound is not running, starting...'
                         sh 'java -jar /var/lib/jenkins/workspace/spoofing_sip_main/inbound-traffic/target/inbound-traffic-0.0.1-SNAPSHOT.jar &'
+                    }
+                }
+            }
+        }
+        post {
+            always {
+                echo 'Checking service inbound...'
+                script {
+                    def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
+                    if (serviceStatus == 0) {
+                        echo 'Service inbound is running.'
+                    } else {
+                        echo 'Service inbound is not running.'
                     }
                 }
             }
