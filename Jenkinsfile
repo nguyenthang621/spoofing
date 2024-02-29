@@ -73,7 +73,7 @@ pipeline {
                     remote.user = 'rnd'
                     remote.password = 'abcd456789'
                     remote.allowAnyHosts = true
-                    sshCommand remote: remote, command: "systemctl restart inbound"
+                    sshCommand remote: remote, command: "sudo systemctl restart inbound"
                     // check status service
                     def serviceStatus = sh(script: 'service inbound status', returnStatus: true)
                     if (serviceStatus == 0) {
